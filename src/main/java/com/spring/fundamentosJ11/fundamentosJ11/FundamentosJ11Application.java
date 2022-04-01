@@ -1,6 +1,7 @@
 package com.spring.fundamentosJ11.fundamentosJ11;
 
 
+import com.spring.fundamentosJ11.fundamentosJ11.Bean.MyBeanWhithPropierties;
 import com.spring.fundamentosJ11.fundamentosJ11.components.ComponentDependency; 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -11,12 +12,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FundamentosJ11Application implements CommandLineRunner{
     
     private ComponentDependency compoDependency;
+    private MyBeanWhithPropierties myBeanWhithPropierties;
    
     public FundamentosJ11Application(
             @Qualifier("componentTwoImplement")
-               ComponentDependency compoDependency
+               ComponentDependency compoDependency,
+               MyBeanWhithPropierties myBeanWhithPropierties
             ){
         this.compoDependency  = compoDependency;
+        this.myBeanWhithPropierties = myBeanWhithPropierties;
     };
     
     public static void main(String[] args) {
@@ -25,7 +29,10 @@ public class FundamentosJ11Application implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-       compoDependency.saludar(); 
+       compoDependency.saludar();
+        System.err.println("---------------------------");
+       System.out.println(myBeanWhithPropierties.function());
+       System.err.println("---------------------------");
     }
 
 }
