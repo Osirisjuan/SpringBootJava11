@@ -4,6 +4,9 @@
  */
 package com.spring.fundamentosJ11.fundamentosJ11.Bean;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  *
  * @author juanj
@@ -12,6 +15,7 @@ public class MyBeanWhithPropiertiesImplements implements MyBeanWhithPropierties{
     
     private String name;
     private String last_name;
+    Log LOGGER = LogFactory.getLog(MyBeanWhithPropiertiesImplements.class);
     
     public MyBeanWhithPropiertiesImplements(String name, String last_name) {
         this.name = name;
@@ -20,6 +24,7 @@ public class MyBeanWhithPropiertiesImplements implements MyBeanWhithPropierties{
 
     @Override
     public String function() {
+        LOGGER.info("Este es un mensaje de informacion deade MyBeanWhithPropiertiesImplements");
         return name + " " + last_name;
     }
     
