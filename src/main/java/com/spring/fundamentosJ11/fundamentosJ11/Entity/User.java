@@ -4,19 +4,14 @@
  */
 package com.spring.fundamentosJ11.fundamentosJ11.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
 
 /**
  *
@@ -47,7 +42,7 @@ public class User {
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
-    private List<Post> list = new ArrayList<>();
+    private List<Post> post = new ArrayList<>();
 
     /**
      * Creamos el contructor
@@ -104,11 +99,11 @@ public class User {
     }
 
     public List<Post> getList() {
-        return list;
+        return post;
     }
 
     public void setList(List<Post> list) {
-        this.list = list;
+        this.post = list;
     }
 
     /**
@@ -121,7 +116,7 @@ public class User {
              ", name=" + name + 
              ", email=" + email + 
              ", birthDate=" + birthDate + 
-             ", list=" + list + '}';
+             ", post=" + post + '}';
     }
     
     

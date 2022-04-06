@@ -7,10 +7,13 @@ package com.spring.fundamentosJ11.fundamentosJ11.Configuration;
 import com.spring.fundamentosJ11.fundamentosJ11.Bean.MyBeanWhithPropierties;
 import com.spring.fundamentosJ11.fundamentosJ11.Bean.MyBeanWhithPropiertiesImplements;
 import com.spring.fundamentosJ11.fundamentosJ11.pojo.UserPojo;
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  *
@@ -36,7 +39,19 @@ public class GeneralConfigurations {
     @Bean
     public MyBeanWhithPropierties funcion(){
         return new MyBeanWhithPropiertiesImplements(name, last_name);
+    } 
+    /**
+     * Bean que guarda la configuracion de la base de datos personalizada sin 
+     * ocupar las configuraciones en el archivo propierties
+     * @return 
+     */
+   @Bean
+    public DataSource dataSource(){
+        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        dataSourceBuilder.driverClassName("org.h2.Driver");
+        dataSourceBuilder.url("jdbc:h2:mem:test");
+        dataSourceBuilder.username("SA");
+        dataSourceBuilder.password("");
+        return dataSourceBuilder.build();
     }
 }
-
- 

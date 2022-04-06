@@ -4,13 +4,9 @@
  */
 package com.spring.fundamentosJ11.fundamentosJ11.Entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 /**
  *Los JPa deben de tener la notacion entity con la cual hacemos referencia a que 
@@ -27,15 +23,17 @@ public class Post {
      * tabla en la base de datos.
      * 
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //identity para que no se siga el contador de otros registros
     @Column(name = "id_post", nullable = false, unique = true)
-    private Long id;
+    private Long id; 
        
     @Column(name = "description", length = 255)
     private String description;
     
     @ManyToOne
+    @JoinColumn(name = "user_id") //No necesario para el ejemplo del curso pero se puede explicar
+    @JsonBackReference
     private User user;
 
     public Post() {
