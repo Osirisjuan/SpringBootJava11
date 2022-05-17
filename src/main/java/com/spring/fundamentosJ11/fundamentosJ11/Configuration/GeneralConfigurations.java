@@ -20,6 +20,7 @@ import org.springframework.context.annotation.PropertySource;
  * @author juanj
  */
 @Configuration
+@PropertySource("classpath:connection.propierties")
 @EnableConfigurationProperties(UserPojo.class)
 public class GeneralConfigurations {
     
@@ -36,6 +37,23 @@ public class GeneralConfigurations {
     @Value("${value.random}")
     private String random;
     
+    /***
+     * Obtenemos los valosres que se encuentran en nuestro archivo de propiedades 
+     * para la conexion se obtienen los datos y se almacenan en la tabla
+     */
+    @Value("${jdbc.url}")
+    private String jdbcurl;
+    
+    @Value("${driver}")
+    private String driver;
+    
+    @Value("${username}")
+    private String username;
+    
+    @Value("${password}")
+    private String password;
+    
+    
     @Bean
     public MyBeanWhithPropierties funcion(){
         return new MyBeanWhithPropiertiesImplements(name, last_name);
@@ -48,10 +66,10 @@ public class GeneralConfigurations {
    @Bean
     public DataSource dataSource(){
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:mem:test");
-        dataSourceBuilder.username("SA");
-        dataSourceBuilder.password("");
+        dataSourceBuilder.driverClassName(driver);
+        dataSourceBuilder.url(jdbcurl);
+        dataSourceBuilder.username(username);
+        dataSourceBuilder.password(password);
         return dataSourceBuilder.build();
     }
 }
